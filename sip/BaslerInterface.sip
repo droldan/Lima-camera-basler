@@ -44,5 +44,14 @@ namespace Basler
 %MethodCode
 	sipCpp->getCamera().getAutoGain(a0);
 %End
+    void		setAutoWhiteBalance(bool white_balance);
+%MethodCode
+	sipCpp->getCamera().setAutoWhiteBalance(a0);
+%End
+    void		getAutoWhiteBalance(bool& white_balance /Out/) const;
+%MethodCode
+	sipCpp->getCamera().getAutoWhiteBalance(a0);
+%End
+
   };
 };

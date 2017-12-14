@@ -90,6 +90,9 @@ namespace Basler
     void setGain(double gain);
     void getGain(double& gain /Out/) const;
 
+    void setAutoWhiteBalance(bool auto_gain);
+    void getAutoWhiteBalance(bool& auto_gain /Out/) const;
+
     void getStatus(Basler::Camera::Status& status /Out/);
 	
 
@@ -109,6 +112,7 @@ namespace Basler
     // -- Pylon buffers statistics
     void getStatisticsTotalBufferCount(long& count);    
     void getStatisticsFailedBufferCount(long& count);
+
   };
 
 };

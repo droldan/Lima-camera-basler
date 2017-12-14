@@ -486,6 +486,7 @@ void Camera::_stopAcq(bool internalFlag)
     }    
 }
 
+
 void Camera::_freeStreamGrabber()
 {
   DEB_MEMBER_FUNCT();
@@ -1574,7 +1575,6 @@ bool Camera::isAutoGainAvailable() const
     return GenApi::IsAvailable(Camera_->GainAuto);
 }
 
-
 //-----------------------------------------------------
 //
 //-----------------------------------------------------
@@ -1701,6 +1701,64 @@ void Camera::getAutoGain(bool& auto_gain) const
     }
 
     DEB_RETURN() << DEB_VAR1(auto_gain);
+}
+
+//-----------------------------------------------------
+//
+//-----------------------------------------------------
+void Camera::setAutoWhiteBalance(bool white_balance)
+{
+    DEB_MEMBER_FUNCT();
+    DEB_PARAM() << DEB_VAR1(white_balance);
+    try
+    {
+        DEB_WARNING() <<  GenApi::IsAvailable(Camera_->BalanceWhiteAuto);
+
+        if (GenApi::IsAvailable(Camera_->BalanceWhiteAuto))
+        {
+
+            if (!white_balance)
+            {
+                Camera_->BalanceWhiteAuto.SetValue(BalanceWhiteAuto_Off);
+                //Camera_->GainSelector.SetValue(GainSelector_All);
+            }
+            else
+            {
+
+                Camera_->BalanceWhiteAuto.SetValue(BalanceWhiteAuto_Continuous);
+            }
+        }
+    }
+    catch (GenICam::GenericException &e)
+    {
+        DEB_WARNING() << e.GetDescription();
+    }
+}
+
+//-----------------------------------------------------
+//
+//-----------------------------------------------------
+void Camera::getAutoWhiteBalance(bool& white_balance) const
+{
+    DEB_MEMBER_FUNCT();
+    try
+    {
+        if (GenApi::IsAvailable(Camera_->BalanceWhiteAuto))
+        {
+            white_balance = Camera_->BalanceWhiteAuto.GetValue();
+        }
+        else
+        {
+            white_balance = false;
+//			THROW_HW_ERROR(Error)<<"GainAuto Parameter is not Available !";
+        }
+    }
+    catch (GenICam::GenericException &e)
+    {
+        DEB_WARNING() << e.GetDescription();
+    }
+
+    DEB_RETURN() << DEB_VAR1(white_balance);
 }
 
 

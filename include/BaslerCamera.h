@@ -102,7 +102,7 @@ class LIBBASLER_API Camera
     void prepareAcq();
     void startAcq();
     void stopAcq();
-    
+
     // -- detector info object
     void getImageType(ImageType& type);
     void setImageType(ImageType type);
@@ -171,6 +171,10 @@ class LIBBASLER_API Camera
     bool isAutoGainAvailable() const;
     void setAutoGain(bool auto_gain);
     void getAutoGain(bool& auto_gain) const;
+
+    bool isAutoWhiteBalanceAvailable() const;
+    void setAutoWhiteBalance(bool white_balance);
+    void getAutoWhiteBalance(bool& white_balance) const;
 
     bool isTemperatureAvailable() const;
     void getTemperature(double& temperature);    
